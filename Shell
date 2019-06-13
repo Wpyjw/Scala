@@ -64,10 +64,19 @@ sh -x lujingwenjian  日志
 mvn pachage 完成打jar包的命令 构建项目软件包
 
 RDD 弹性分布式数据集
+不可变、可分区、里面的元素可并行计算的集合。
+
+
 
 's'字符串插值器允许在处理字符串时直接使用变量
 
 --class: 应用入口类（例如：org.apache.spark.examples.SparkPi)）
 
 hadoop fs -ls列出指定目录下的文件及文件夹
--du 显示目录中素有文件的大小，或者当只指定一个文件时，显示此文件的大小。
+-du 显示目录中所有文件的大小，或者当只指定一个文件时，显示此文件的大小。
+
+scala中=>
+1.表示函数的返回类型
+2.匿名函数
+3.case语句
+4.By-Name Parameters（传名参数）
