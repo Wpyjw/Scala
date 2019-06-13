@@ -1,0 +1,59 @@
+Scala 语句末尾的分号 ; 是可选的。
+脚本形式
+object HelloWorld {
+   /* 这是我的第一个 Scala 程序
+    * 以下程序将输出'Hello World!' 
+    */
+   def main(args: Array[String]) {
+      println("Hello, world!") // 输出 Hello World
+   }
+}
+
+类名 - 对于所有的类名的第一个字母要大写。
+方法名称 - 所有的方法名称的第一个字母用小写
+然而以"$"开头的标识符为保留的 Scala 编译器产生的标志符使用
+Scala 使用 package 关键字定义包
+在Scala将代码定义到某个包中有两种方式
+第一种方法和 Java 一样，在文件的头定义包名，这种方法就后续所有代码都放在该包中。 比如：
+package com.runoob
+class HelloWorld
+第二种方法有些类似 C#，如：
+
+package com.runoob {
+  class HelloWorld 
+}
+
+var 声明变量
+声明变量实例：var myVar:String="Foo"
+            var myVar:String="Too"
+
+
+
+
+val 声明常量 val myVal:String="Foo"
+
+变量的类型的声明
+var VariableName : DataType [=  Initial Value]
+val VariableName : DataType [=  Initial Value]
+
+方法定义
+def functionName ([参数列表]) : [return type] = {
+   function body
+   return [expr]
+}
+
+object add{
+   def addInt( a:Int, b:Int ) : Int = {
+      var sum:Int = 0
+      sum = a + b
+
+      return sum
+   }
+}
+
+如果方法没有返回值，可以返回为 Unit，这个类似于 Java 的 void, 实例如下：
+object Hello{
+   def printMe( ) : Unit = {
+      println("Hello, Scala!")
+   }
+}
