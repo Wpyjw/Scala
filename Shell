@@ -60,3 +60,14 @@ pwd 查看当前路径
 
 mvn package 
 sh -x lujingwenjian  日志
+
+mvn pachage 完成打jar包的命令 构建项目软件包
+
+RDD 弹性分布式数据集
+
+'s'字符串插值器允许在处理字符串时直接使用变量
+
+--class: 应用入口类（例如：org.apache.spark.examples.SparkPi)）
+
+hadoop fs -ls列出指定目录下的文件及文件夹
+-du 显示目录中素有文件的大小，或者当只指定一个文件时，显示此文件的大小。
