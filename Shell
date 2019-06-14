@@ -65,8 +65,13 @@ mvn pachage 完成打jar包的命令 构建项目软件包
 
 RDD 弹性分布式数据集
 不可变、可分区、里面的元素可并行计算的集合。
+RDD 方法
+map(func) 返回一个新的RDD，该RDD由每一个输入元素经过func函数转换后组成
+flatMap(func) 类似于map，但是每一个输入元素可以被映射为0或多个输出元素（所以func应该返回一个序列，而不是单一元素）
+join(otherDataset, [numTasks]) 在类型为(K,V)和(K,W)的RDD上调用，返回一个相同key对应的所有元素对在一起的(K,(V,W))的RDD  相当于内连接（求交集
+cogroup(otherDataset, [numTasks]) 在类型为(K,V)和(K,W)的RDD上调用，返回一个(K,(Iterable<V>,Iterable<W>))类型的RDD
 
-
+RDD的属性 1 一组分片
 
 's'字符串插值器允许在处理字符串时直接使用变量
 
@@ -80,3 +85,5 @@ scala中=>
 2.匿名函数
 3.case语句
 4.By-Name Parameters（传名参数）
+闭包是一个函数，返回值依赖于声明在函数外部的一个或多个变量
+
