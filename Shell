@@ -87,3 +87,78 @@ scala中=>
 4.By-Name Parameters（传名参数）
 闭包是一个函数，返回值依赖于声明在函数外部的一个或多个变量
 
+
+Spark
+Spark-Shell
+val textFile = sc.textFile("README.md")
+spark.RDD[String] = spark.MappedRDD@2ee9b6e3
+
+
+
+RDDs支持2种类型的操作：
+转换(transformations) 从已经存在的数据集中创建一个新的数据集；
+  map 是一个转换操作，它将每一个数据集元素传递给一个函数并且返回一个新的 RDD。
+动作(actions) 在数据集上进行计算之后返回一个值到驱动程序。
+  reduce 是一个动作，它使用相同的函数来聚合 RDD 的所有元素，并且将最终的结果返回到驱动程序
+
+样例类
+使用了case关键字的类定义就是样例类，样例类是种特殊的类，经过优化以用于模式匹配。
+
+scala Option(选项)类型用来表示一个值是可选的（有值或无值）
+Option[T]是一个类型为T的可选值的容器：如果值存在，Option[T]就是一个Some[T],如果不存在，Option[T]就是对象None。
+
+Scala
+类名称 第一个字母应为大写。。如果使用多个单词来形成类的名称，则每个内部单词的第一个字母应该是大写。
+方法名称 - 所有方法名称应以小写字母开头。如果使用多个单词形成方法的名称，则每个内部单词的第一个字母应为大写。
+
+语法
+var myVar:String="Foo"
+val myVal:String="Foo"
+
+多个赋值 如果代码块或方法返回一个元组，则可以将元组分配给一个val变量。
+val (myVar1:Int,myVar2:String)=Pair(40,"Foo")
+函数声明  def functionName ([list of parameters]) : [return type]
+如果不使用等号和方法体，则隐式声明抽象方法
+
+函数定义
+def functionName ([list of parameters]): [return type]={
+  function body
+  return [expr]
+}
+
+def shadoubufanhui(): Unit{
+
+}
+
+调用方法
+functionName(list of parameters)
+[instance.]functionName( list of parameters )
+
+匿名函数 (x: Int)=>x+1
+函数文字，在运行时，函数文字被实例化成为函数值的对象
+var inc= (x:Int)=>x+1
+var x=inc(7)-1
+var mul=(x:Int,y:Int)=>x*y
+var userDir = () => { System.getProperty("user.dir") }
+
+字符串
+var greeting="Hello World";
+
+var palindrome = "Dot saw I was Tod";
+var len = palindrome.length();
+声明数组变量
+var z:Array[String]=new Array[String](3)
+var z=new Array[String](3)
+z(0)="3"
+定义数组的方法 var z = Array("Maxsu", "Nancy", "Alen")
+
+Scala元组 元组可以容纳不同类型的对象，但它们也是不可变的
+val t=(1,"hello",Console)
+val sum = t._1 + t._2 + t._3 + t._4
+ Scala映射
+声明不可变映射的示例声明
+var A:Map[Char,Int]=Map()
+var colors=Map("red"->"#FF00000","azure"->"#F0FFFF")
+
+
+
