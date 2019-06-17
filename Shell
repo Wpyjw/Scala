@@ -160,5 +160,86 @@ val sum = t._1 + t._2 + t._3 + t._4
 var A:Map[Char,Int]=Map()
 var colors=Map("red"->"#FF00000","azure"->"#F0FFFF")
 
+ curly braces form a block of code, which evaluates to the last line of code (all languages do this)；
+ a function if desired can be generated with the block of code (follows rule 1)；
+ curly braces can be omitted for one-line code except for a case clause (Scala choice)；
+ parentheses can be omitted in function call with a single parameter (Scala choice)；
+ almost never omit both。
 
+ 大括号{}用于代码块，计算结果是代码最后一行；
+ 大括号{}用于拥有代码块的函数；
+ 大括号{}在只有一行代码时可以省略，除了case语句（Scala适用）；
+ 小括号()在函数只有一个参数时可以省略（Scala适用）；
+ 几乎没有二者都省略的情况。
+
+val tupleList = List[(String, String)]()
+// doesn't compile, violates case clause requirement
+val filtered = tupleList.takeWhile( case (s1, s2) => s1 == s2 )
+// block of code as a partial function and parentheses omission,
+// i.e. tupleList.takeWhile({ case (s1, s2) => s1 == s2 })
+val filtered = tupleList.takeWhile{ case (s1, s2) => s1 == s2 }
+ 
+// curly braces omission, i.e. List(1, 2, 3).reduceLeft({_+_})
+List(1, 2, 3).reduceLeft(_+_)
+// parentheses omission, i.e. List(1, 2, 3).reduceLeft({_+_})
+List(1, 2, 3).reduceLeft{_+_}
+// not both though it compiles, because meaning totally changes due to precedence
+List(1, 2, 3).reduceLeft _+_ // res1: String => String = <function1>
+ 
+// curly braces omission, i.e. List(1, 2, 3).foldLeft(0)({_ + _})
+List(1, 2, 3).foldLeft(0)(_ + _)
+// parentheses omission, i.e. List(1, 2, 3).foldLeft(0)({_ + _})
+List(1, 2, 3).foldLeft(0){_ + _}
+// block of code and parentheses omission
+List(1, 2, 3).foldLeft {0} {_ + _}
+// not both though it compiles, because meaning totally changes due to precedence
+List(1, 2, 3).foldLeft(0) _ + _
+// error: ';' expected but integer literal found.
+List(1, 2, 3).foldLeft 0 (_ + _)
+
+cogroup cogroup(otherDataset, [numTasks])是将输入数据集(K, V)和另外一个数据集(K, W)进行cogroup，得到一个格式为(K, Seq[V], Seq[W])的数据集。
+两个RDD中具有重叠的KEY，并且这部分相同的KEY的数据需要进行互相处理（同时区分各自所属不同的RDD）
+有点类似于groupByKey：但是goupByKey是在一个由（K,V）对组成的数据集上调用，返回一个（K,Seq[V])对的数据集。
+
+join 当调用类型（K,V）和（K,W）的数据集时，返回（K,(V,W)）对的数据以及每个键的所有元素对
+cogroup 当调用类型（K,V）和（K,W）的数据集时，返回（K,(Iterable<V>,Iterable<W>)）元组的数据集
+
+/**
+    * join（otherDataSet，[numTasks]）
+    * 加入一个RDD，在一个（k，v）和（k，w）类型的dataSet上调用，返回一个（k，（v，w））的pair dataSet。
+    */
+  def join(): Unit ={
+    val list1RDD = sc.parallelize(List((1, "华山派"), (2, "武当派"), (3, "明教"), (3, "崆峒派")))
+    val list2RDD = sc.parallelize(List((1, 66), (2, 77), (3, 88)))
+    list1RDD.join(list2RDD)
+      .foreach(println)
+  }
+
+(1,(华山派,66))
+(3,(明教,88))
+(3,(崆峒派,88))
+(2,(武当派,77))
+
+/**
+    * cogroup（otherDataSet，[numTasks]）
+    * 对两个RDD中的KV元素，每个RDD中相同key中的元素分别聚合成一个集合。与reduceByKey不同的是针对
+    * 两个RDD中相同的key的元素进行合并。
+    *
+    * 合并两个RDD，生成一个新的RDD。实例中包含两个Iterable值，第一个表示RDD1中相同值，第二个表示RDD2
+    * 中相同值（key值），这个操作需要通过partitioner进行重新分区，因此需要执行一次shuffle操作。（
+    * 若两个RDD在此之前进行过shuffle，则不需要）
+    */
+def cogroup(): Unit ={
+    val list1RDD = sc.parallelize(List((1, "cat"), (2, "dog")))
+    val list2RDD = sc.parallelize(List((1, "tiger"), (1, "elephant"), (3, "panda"), (3, "chicken")))
+    val list3RDD = sc.parallelize(List((1, "duck"), (1, "lion"), (3, "bird"), (3, "fish"), (4, "flowers")))
+
+    list1RDD.cogroup(list2RDD,list3RDD)
+      .foreach(println)
+  }
+
+(4,(CompactBuffer(),CompactBuffer(),CompactBuffer(flowers)))
+(1,(CompactBuffer(cat),CompactBuffer(tiger, elephant),CompactBuffer(duck, lion)))
+(3,(CompactBuffer(),CompactBuffer(panda, chicken),CompactBuffer(bird, fish)))
+(2,(CompactBuffer(dog),CompactBuffer(),CompactBuffer()))
 
