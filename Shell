@@ -261,3 +261,50 @@ git branch --set-upstream-to=origin/zhangwanpeng zhangwanpeng
 
 git pull origin zhangwanpeng
 在Spark目录里使用下面的方式开始运行。
+
+RDD  窄依赖 宽依赖
+宽依赖：划分stage，每个stage包含一个或多个task任务
+
+DAG 有向无环图
+
+Spark中的每个Action对应一个Job
+
+collect 将RDD类型的数据转化为数组，同时会从远程集群拉取数据到driver端
+
+Spark 作业运行模式 
+本地模式，Standalone模式，Spark on Mesos和Spark on Yarn
+
+本地模式在一个jvm进程里面模拟多个角色，方便小数据量的本地调试。
+Standalone模式为自己使用部署工具在机器上启动Spark Master和worker。
+Spark on Mesos和Spark on Yarn模式是在Mesos和Yarn等集群调度框架运行Spark作业
+
+
+- 本地模式：local/local-cluster
+- standalone模式：spark://host:port
+- spark on Meosos: mesos://host:port
+- Spark on yarn: yarn
+
+master 和 worker 是物理节点
+driver 和 executor是进程
+
+搭建spark集群的时候我们就已经设置好了master节点和worker节点，一个集群有多个master节点和多个worker节点。
+
+master节点常驻master守护进程，负责管理worker节点，我们从master节点提交应用。
+
+worker节点常驻worker守护进程，与master节点通信，并且管理executor进程。
+
+PS：一台机器可以同时作为master和worker节点（举个例子：你有四台机器，你可以选择一台设置为master节点，然后剩下三台设为worker节点，也可以把四台都设为worker节点，这种情况下，有一个机器既是master节点又是worker节点）
+
+driver 和 executor 进程
+https://blog.csdn.net/hongmofang10/article/details/84587262
+
+Spark 的API 在驱动程序里传递函数到集群上运行。
+匿名函数
+全局单例对象里的静态方法。
+shuffle 描述数据从map task输出到reduce task 输入的这段过程。 shuffle是连接Map 和Reduce的桥梁，Map的输出要用到Reduce中必须经过shuffle这个环节。
+shuffle的性能高低直接影响整个程序的性能和吞吐量。因为在分布式情况下，reduce task需要跨节点去拉取其它节点上的map task结果。这一过程将会产生网络资源消耗和内存，磁盘IO的消耗。
+通常shuffle分为两部分：
+Map阶段的数据准备和Reduce阶段的数据拷贝处理。
+一般将在map端的Shuffle称之为Shuffle Write
+在Reduce端的Shuffle称之为Shuffle Read.
+https://blog.csdn.net/weixin_35602748/article/details/78656914
