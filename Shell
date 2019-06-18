@@ -243,3 +243,21 @@ def cogroup(): Unit ={
 (3,(CompactBuffer(),CompactBuffer(panda, chicken),CompactBuffer(bird, fish)))
 (2,(CompactBuffer(dog),CompactBuffer(),CompactBuffer()))
 
+
+git pull 从远程获取最新版本并merge 到本地
+git fetch 相当于从远程获取最新到本地
+
+git remote 用于管理主机名
+git branch 的 -r 选项，可以用来查看远程分支，-a选项查看所有分支。
+
+git status 查看当前分支的状态
+使用git zai 本地新建一个分支后，需要做远程分支关联，如果没有关联，git会在下面的操作中提示你显示的添加关联。
+git branch --set-upstream-to=origin/remote_branch  your_branch
+mvn package 做完的项目要先打包
+标准的推送步骤：
+ git pull origin zhangwanpeng --allow-unrelated-histories
+git branch --set-upstream-to=origin/zhangwanpeng zhangwanpeng
+ git push origin zhangwanpeng
+
+git pull origin zhangwanpeng
+在Spark目录里使用下面的方式开始运行。
