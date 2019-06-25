@@ -308,3 +308,9 @@ Map阶段的数据准备和Reduce阶段的数据拷贝处理。
 一般将在map端的Shuffle称之为Shuffle Write
 在Reduce端的Shuffle称之为Shuffle Read.
 https://blog.csdn.net/weixin_35602748/article/details/78656914
+
+https://blog.csdn.net/weixin_35602748/article/details/78645170 戏说Spark 1
+https://blog.csdn.net/weixin_35602748/article/details/78724195 Stage划分
+
+窄依赖，父类分区内的数据，会被子类RDD中的指定的唯一一个分区所消费
+宽依赖，指的是父类一个分区内的数据，会被子RDD内的多个分区消费，需要自行判断分区，来实现数据发送的效果
