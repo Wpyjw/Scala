@@ -1,0 +1,16 @@
+1.利用scala/push/feature_extract/MergeProfileLabelLibsvm.scala将用户画像和标签合并，保存
+inputpath:
+    profilePath:/user/h_data_platform/platform/feeds/push_user_profile_shortvideo
+    labelPath:/user/s_lcs/feeds/feeds_o2o_mivideo_push_log_info
+outputpath:
+    featurePath:/user/h_data_platform/platform/feeds/mitv_feeds_lgbm_sample
+    
+2.scala/push/feature_extract/ExtractSamples.scala将样本抽取一定的比例，分成训练和测试集。
+inputpath:/user/h_data_platform/platform/feeds/mitv_feeds_lgbm_sample
+outputpath:/user/h_data_platform/platform/feeds/mitv_lgbm_traintest_sample
+
+3.scripts/push/model/lgbm_change_online_conf_for_push.sh 修改lgbm配置参数，包括输入路径、业务名、版本号等
+4.scripts/push/model/lgbm_train_update_for_push_v2.sh训练模型和更新在线模型
+至此，模型训练完毕
+
+
