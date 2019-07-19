@@ -314,3 +314,24 @@ https://blog.csdn.net/weixin_35602748/article/details/78724195 Stage划分
 
 窄依赖，父类分区内的数据，会被子类RDD中的指定的唯一一个分区所消费
 宽依赖，指的是父类一个分区内的数据，会被子RDD内的多个分区消费，需要自行判断分区，来实现数据发送的效果
+
+``是命令替换，命令替换是指Shell可以先执行``中的命令，将输出结果暂时保存，在适当的地方输出。语法:`command`
+-eq           //等于
+
+-ne           //不等于
+
+-gt            //大于 （greater ）
+
+-lt            //小于  （less）
+
+-ge            //大于等于
+
+-le            //小于等于
+
+大图 buttonStyleBuilder
+
+ nsb.bigPictureStyle() // 这里声明了是大图
+ nsb.bigTextStyle() // 这里声明了是大文本
+ 
+ 
+ 序列化类 com.xiaomi.data.spec.platform.feeds.FeedsPushLrSample
